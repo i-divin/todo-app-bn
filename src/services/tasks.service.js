@@ -5,12 +5,12 @@ import ApiError from '../utils/errorHandler.js';
 
 
 export const createTaskService = async(user,taskData) =>{
-    const userData = await User.findById(user.id)
+    const userData = await User.findById(user.id)  
     const {title,description}=taskData;
     if(!userData){
-        throw new ApiError('User with id = ${user.id} not found', 404)
+        throw new ApiError(`User with id = ${user.id} not found`, 404) 
     }
-    const userId = userId;
+    const userId = user.id;  
     try{
         const newTask = await Task.create({
             user:userId,

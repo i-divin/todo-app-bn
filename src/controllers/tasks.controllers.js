@@ -10,9 +10,10 @@ export const createTask = async(req,res) => {
         if (!title || !description) {
             return res.status(400).json({message:"please provide all fields!"})
         }
-        const task = await createTaskService(user,taskData);
+        const taskData = {title, description};
+        const task = await createTaskService(user, taskData);
         return res.status(201).json({message:"task created successfully!",task})
-    }catch{
+    }catch (error) {
         return res.status(500).json({message:'internal server error',error});
         }
     }
