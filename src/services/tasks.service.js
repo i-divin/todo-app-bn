@@ -22,3 +22,14 @@ export const createTaskService = async(user,taskData) =>{
         throw new ApiError('Error creating task', error)
     }
 };
+
+export const getAllTaskService = async(user) =>{
+    try{
+        const userTasksData = await Task.find({user:user.id})
+        return userTasksData;
+    }
+    catch(error){
+        console.log(error)
+        throw new ApiError('Error fetching tasks', error)
+    }
+}

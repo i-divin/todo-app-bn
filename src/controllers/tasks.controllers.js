@@ -1,4 +1,4 @@
-import { createTaskService } from "../services/tasks.service.js";
+import { createTaskService,getAllTaskService } from "../services/tasks.service.js";
 
 export const createTask = async(req,res) => {
     const user = req.user;
@@ -17,4 +17,19 @@ export const createTask = async(req,res) => {
         return res.status(500).json({message:'internal server error',error});
         }
     }
+
+    export const getAllTasks = async(req,res) =>{
+        const user = req.user;
+        try{
+            if (!user) {
+                return res.status(401).json({message:"user must be logged in!"})
+            }
+            const userTasks = await getAllTaskService(user);
+            return res.status(200).json(userTasks);
+        }catch(error){
+            console.log(error)
+            return res.status(500).json({message:'internal server error',error});
+        }
+    };
+    
 
